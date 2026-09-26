@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { FormEvent } from 'react';
 import type { CalculateRequest } from '../types/calculator';
 import {
   LIMITS,
@@ -35,7 +36,7 @@ export function CalculatorForm({
     setErrors((current) => ({ ...current, [field]: undefined }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const request: CalculateRequest = {
