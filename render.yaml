@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: deposit-calculator-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: FRONTEND_URL
+        sync: false
