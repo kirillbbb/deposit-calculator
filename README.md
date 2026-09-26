@@ -12,15 +12,18 @@ Fullstack-калькулятор вклада с ежемесячной капи
 ## Features
 
 - Расчёт итоговой суммы и дохода
+- Ежемесячная капитализация
 - Валидация на frontend и backend
 - Финансовые расчёты через BigDecimal
 - Обработка API и сетевых ошибок
 - Responsive fintech UI
-- Автоматические тесты и CI
+- Автоматические тесты
 
 ## API
 
-`POST /api/calculate`
+### POST /api/calculate
+
+Request:
 
 ```json
 {
@@ -30,6 +33,8 @@ Fullstack-калькулятор вклада с ежемесячной капи
 }
 ```
 
+Response:
+
 ```json
 {
   "total": 108839.09,
@@ -37,19 +42,100 @@ Fullstack-калькулятор вклада с ежемесячной капи
 }
 ```
 
-Ограничения: сумма 1 000–10 000 000 ₽, срок 1–60 месяцев, ставка 1–20%.
+Ограничения:
+
+- сумма: 1 000–10 000 000 ₽
+- срок: 1–60 месяцев
+- ставка: 1–20%
 
 ## Local development
 
-Backend запускается на `http://localhost:8080`, frontend — через Vite на `http://localhost:5173`.
+### Требования
 
-Для production frontend использует `VITE_API_URL`, backend — `FRONTEND_URL`.
+- Java 21+
+- Maven 3.9+
+- Node.js 22+
+- npm
 
-## Deployment
+### 1. Клонирование
 
-- Frontend: Vercel, root directory `frontend`
-- Backend: Render using `render.yaml` and `backend/Dockerfile`
-- Frontend env: `VITE_API_URL=<backend-url>/api`
-- Backend env: `FRONTEND_URL=<frontend-url>`
+```bash
+git clone https://github.com/kirillbbb/deposit-calculator.git
+cd deposit-calculator
+```
 
-Production links will be added after deployment.
+### 2. Запуск backend
+
+В отдельном терминале:
+
+```bash
+cd backend
+mvn clean test
+mvn spring-boot:run
+```
+
+Backend будет доступен на:
+
+```
+http://localhost:8080
+```
+
+Проверка:
+
+```
+http://localhost:8080/api/health
+```
+
+Ожидаемый ответ:
+
+```json
+{"status":"ok"}
+```
+
+### 3. Запуск frontend
+
+В другом терминале:
+
+```bash
+cd frontend
+npm install
+npm test
+npm run dev
+```
+
+Frontend будет доступен на:
+
+```
+http://localhost:5173
+```
+
+Frontend в режиме разработки проксирует запросы `/api` на backend `http://localhost:8080`.
+
+### 4. Использование
+
+Откройте:
+
+```
+http://localhost:5173
+```
+
+Введите сумму, срок и годовую ставку и нажмите «Рассчитать».
+
+## Проверка проекта
+
+Backend:
+
+```bash
+cd backend
+mvn test
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm test
+npm run build
+```
+
+GitHub Actions также автоматически запускает backend-тесты и frontend-тесты/сборку при изменениях соответствующей части проекта.
