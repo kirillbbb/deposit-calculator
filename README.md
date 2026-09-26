@@ -47,4 +47,9 @@ Backend запускается на `http://localhost:8080`, frontend — чер
 
 ## Deployment
 
+- Frontend: Vercel, root directory `frontend`
+- Backend: Render using `render.yaml` and `backend/Dockerfile`
+- Frontend env: `VITE_API_URL=<backend-url>/api`
+- Backend env: `FRONTEND_URL=<frontend-url>`
+
 Production links will be added after deployment.
