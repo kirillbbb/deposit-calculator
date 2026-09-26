@@ -1,25 +1,26 @@
 # Deposit Calculator
 
-Fullstack deposit calculator built with Java and React.
+Fullstack-калькулятор вклада с ежемесячной капитализацией.
 
 ## Stack
 
-- Java 21 + Spring Boot
-- React + TypeScript + Vite
+- Backend: Java 21, Spring Boot, Maven
+- Frontend: React, TypeScript, Vite
+- Tests: JUnit 5, Vitest
+- CI: GitHub Actions
 
 ## Features
 
-- Deposit calculation with monthly capitalization
-- Input validation
-- Financial calculations with BigDecimal
-- Responsive fintech-style UI
-- API and automated tests
+- Расчёт итоговой суммы и дохода
+- Валидация на frontend и backend
+- Финансовые расчёты через BigDecimal
+- Обработка API и сетевых ошибок
+- Responsive fintech UI
+- Автоматические тесты и CI
 
 ## API
 
 `POST /api/calculate`
-
-Request:
 
 ```json
 {
@@ -29,18 +30,20 @@ Request:
 }
 ```
 
-Response:
-
 ```json
 {
-  "total": 108800.00,
-  "profit": 8800.00
+  "total": 108839.09,
+  "profit": 8839.09
 }
 ```
 
-## Run locally
+Ограничения: сумма 1 000–10 000 000 ₽, срок 1–60 месяцев, ставка 1–20%.
 
-Backend and frontend instructions will be added with implementation.
+## Local development
+
+Backend запускается на `http://localhost:8080`, frontend — через Vite на `http://localhost:5173`.
+
+Для production frontend использует `VITE_API_URL`, backend — `FRONTEND_URL`.
 
 ## Deployment
 
