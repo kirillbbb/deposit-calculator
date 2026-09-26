@@ -57,30 +57,87 @@ Response:
 - Node.js 22+
 - npm
 
-### 1. Клонирование
+### Установка
+
+После клонирования репозитория установите зависимости:
 
 ```bash
-git clone https://github.com/kirillbbb/deposit-calculator.git
-cd deposit-calculator
+npm install
+npm run install:all
 ```
 
-### 2. Запуск backend
+Первая команда устанавливает зависимости корневого оркестратора, вторая — frontend.
 
-В отдельном терминале:
+### Единый запуск
+
+Из корня проекта:
+
+```bash
+npm run dev
+```
+
+Команда одновременно запускает backend и frontend.
+
+- Backend: `http://localhost:8080`
+- Frontend: `http://localhost:5173`
+
+Для остановки обоих процессов нажмите `Ctrl+C`.
+
+Frontend в режиме разработки проксирует запросы `/api` на backend `http://localhost:8080`.
+
+### Тесты
+
+Все тесты:
+
+```bash
+npm test
+```
+
+Только frontend:
+
+```bash
+npm run test:frontend
+```
+
+Только backend:
+
+```bash
+npm run test:backend
+```
+
+### Сборка
+
+Собрать frontend и backend:
+
+```bash
+npm run build
+```
+
+Отдельно:
+
+```bash
+npm run build:frontend
+npm run build:backend
+```
+
+### Запуск без оркестратора
+
+Backend:
 
 ```bash
 cd backend
-mvn clean test
 mvn spring-boot:run
 ```
 
-Backend будет доступен на:
+Frontend в отдельном терминале:
 
-```
-http://localhost:8080
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-Проверка:
+Проверка backend:
 
 ```
 http://localhost:8080/api/health
@@ -92,50 +149,6 @@ http://localhost:8080/api/health
 {"status":"ok"}
 ```
 
-### 3. Запуск frontend
+## CI
 
-В другом терминале:
-
-```bash
-cd frontend
-npm install
-npm test
-npm run dev
-```
-
-Frontend будет доступен на:
-
-```
-http://localhost:5173
-```
-
-Frontend в режиме разработки проксирует запросы `/api` на backend `http://localhost:8080`.
-
-### 4. Использование
-
-Откройте:
-
-```
-http://localhost:5173
-```
-
-Введите сумму, срок и годовую ставку и нажмите «Рассчитать».
-
-## Проверка проекта
-
-Backend:
-
-```bash
-cd backend
-mvn test
-```
-
-Frontend:
-
-```bash
-cd frontend
-npm test
-npm run build
-```
-
-GitHub Actions также автоматически запускает backend-тесты и frontend-тесты/сборку при изменениях соответствующей части проекта.
+GitHub Actions автоматически запускает backend-тесты и frontend-тесты/сборку при изменениях соответствующей части проекта.
